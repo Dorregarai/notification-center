@@ -1,12 +1,13 @@
 import React from "react";
 import Input from "../presentational/Input.js";
+import "../../../Style/style.css";
 
 
 class FormContainer extends React.Component {
     constructor() {
         super();
         this.state = {
-            seo_title: "123"
+            seo_title: "seo"
         };
         this.handleChange = this.handleChange.bind(this);
     }
