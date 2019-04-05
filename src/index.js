@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import FormContainer from "./js/components/container/FormContainer.js";
+import FormContainer from "./container/FormContainer/FormContainer"
 
-ReactDOM.render(<FormContainer />, document.getElementById("root"));
+ReactDOM.render(<FormContainer />, document.getElementById('root'));

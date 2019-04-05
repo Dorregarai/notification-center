@@ -1,0 +1,18 @@
+.read {
+    background-color: inherit;
+}
+.unread {
+    background-color: darkgrey;
+}
+.critical {
+    background-color: red;
+}
+.info {
+    background-color: blue;
+}
+.warn {
+    background-color: yellow;
+}
+.success {
+    background-color: lawngreen;
+}
