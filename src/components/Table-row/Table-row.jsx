@@ -17,7 +17,7 @@ class Table extends React.Component {
         return (
             <tr className="read">
                 <td className={this.state.category}></td>
-                <td>{this.state.category}</td>
+                <td>{this.state.category.toUpperCase()}</td>
                 <td>{this.state.message}</td>
                 <td>{this.state.date}</td>
             </tr>

@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import TableRow from "../Table-row";
+import Dropdown from "../Dropdown";
 import './style.css';
 
 class Table extends React.Component{
@@ -9,7 +9,7 @@ class Table extends React.Component{
             <table className="table">
                 <tr>
                     <td className="table color"></td>
-                    <td>Category *button*</td>
+                    <td><Dropdown/></td>
                     <td>Message</td>
                     <td>Date</td>
                 </tr>
