@@ -1,11 +1,11 @@
 import React from "react";
-import Input from "../../components/Table";
+import Table from "../../components/Table";
 import './style.css';
 
 class FormContainer extends React.Component {
     render() {
         return (
-                <Input />
+                <Table />
         );
     }
 }
