@@ -8,10 +8,10 @@ class Table extends React.Component{
         return(
             <table className="table">
                 <tr>
-                    <td className="table color"></td>
-                    <td><Dropdown/></td>
-                    <td>Message</td>
-                    <td>Date</td>
+                    <td className="color"> </td>
+                    <td className="category"><Dropdown/></td>
+                    <td className="message">Message</td>
+                    <td className="date">Date</td>
                 </tr>
                 <TableRow/>
                 <TableRow/>

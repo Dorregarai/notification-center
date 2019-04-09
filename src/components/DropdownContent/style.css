@@ -18,10 +18,8 @@
     color: white;
     font-family: sans-serif;
 }
-.reset:hover{
-    background-color: transparent;
-}
 .reset:active{
+    color: #d6d6d6;
     border: none;
     position: relative;
     top: 1px

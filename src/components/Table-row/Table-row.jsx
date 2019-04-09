@@ -7,6 +7,7 @@ class Table extends React.Component {
         const date = new Date().toLocaleString();
         super();
         this.state = {
+            mesState: "unread",
             category: "warn",
             message: "some text!",
             date
@@ -15,11 +16,11 @@ class Table extends React.Component {
 
     render() {
         return (
-            <tr className="read">
-                <td className={this.state.category}></td>
-                <td>{this.state.category.toUpperCase()}</td>
-                <td>{this.state.message}</td>
-                <td>{this.state.date}</td>
+            <tr className={this.state.mesState}>
+                <td className={this.state.category}> </td>
+                <td className="row">{this.state.category.toUpperCase()}</td>
+                <td className="row">{this.state.message}</td>
+                <td className="row">{this.state.date}</td>
             </tr>
         )
     }
