@@ -3,4 +3,29 @@
     width: 100%;
     flex-direction: column;
     flex-wrap: wrap;
+    border-collapse: collapse;
+}
+
+.table th:not(.color) {
+    padding: 8px;
+    color: #8f8f8f;
+    text-align: left;
+}
+.table td:not(.color) {
+    padding: 10px;
+    text-align: left;
+}
+.color {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.category {
+
+    width: 15%;
+}
+.message {
+    width: 70%;
+}
+.date {
+    width: 15%;
 }
