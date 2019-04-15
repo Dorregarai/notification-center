@@ -4,58 +4,51 @@ import './style.css';
 
 class TableRow extends React.Component {
     constructor(props) {
-        const date = new Date().toLocaleString();
         super(props);
         this.state = {
-            /*
-            mesState: "unread",
-            category: "warn",
-            message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            date
-            */
-            data: this.props.data
+            mesState: this.props.mesState,
+            category: this.props.category,
+            message: this.props.message,
+            date: this.props.date
         }
     }
 
     handleOnClick = () => {
-        this.state.data.mesState = "read"
+        this.setState({mesState: "read"});
     };
 
-    renderMessage(data){
+    renderMessage(){
         return(
-            <tr onClick={this.handleOnClick()} className={data.mesState}>
-                <td className={data.category+" color"}> </td>
-                <td className="category">{data.category.toUpperCase()}</td>
-                <td className="message">{data.message}</td>
-                <td className="date">{data.date}</td>
+            <tr onClick={this.handleOnClick} className={this.state.mesState}>
+                <td className={this.state.category+" color"}> </td>
+                <td className="category">{this.state.category.toUpperCase()}</td>
+                <td className="message">{this.state.message}</td>
+                <td className="date">{this.state.date}</td>
             </tr>
         )
     }
 
     render() {
         return (
-            <tbody className="table">{
-                this.state.data.map((elem) => {
-                    return this.renderMessage(elem);
-                })
-            }
+            <tbody className="table">
+                { this.renderMessage() }
             </tbody>
         )
     }
 }
 
-TableRow.defaultProps = {
-    data: [],
-};
+/*TableRow.defineProperty(obj, 'key', {
+    enumerable: false,
+    configurable: false,
+    writable: false,
+    value: 'static'
+});*/
+
 TableRow.propTypes = {
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
             mesState: PropTypes.string.isRequired,
             category: PropTypes.string.isRequired,
             message: PropTypes.string.isRequired,
             date: PropTypes.string.isRequired
-        })
-    ).isRequired,
 };
 
 export default TableRow;

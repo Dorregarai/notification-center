@@ -21,7 +21,24 @@ class Table extends React.Component{
                     message="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                     date={Date.now().toLocaleString()}
                 />
-                <TableRow />
+                <TableRow
+                    mesState="unread"
+                    category="warn"
+                    message="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                    date={Date.now().toLocaleString()}
+                />
+                <TableRow
+                    mesState="unread"
+                    category="critical"
+                    message="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                    date={Date.now().toLocaleString()}
+                />
+                <TableRow
+                    mesState="unread"
+                    category="success"
+                    message="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                    date={Date.now().toLocaleString()}
+                />
             </table>
         )
     }
