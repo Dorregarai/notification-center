@@ -1,18 +1,37 @@
-.read {
+.table-row__isRead__true {
     background-color: inherit;
 }
-.unread {
+.table-row__isRead__false {
     background-color: #d2d2d2;
 }
-.critical {
+.table-row__status__error {
+    min-height: inherit;
     background-color: red;
 }
-.info {
+.table-row__status__info {
     background-color: blue;
 }
-.warn {
+.table-row__status__debug {
     background-color: yellow;
 }
-.success {
-    background-color: lawngreen;
+.table-row__status__warn {
+    background-color: #fc7e00;
+}
+.table-row__status__crit {
+    background-color: #ff00a1;
+}
+
+.table-row__color {
+    min-height: inherit;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.table-row__category {
+    width: 15%;
+}
+.table-row__text {
+    width: 70%;
+}
+.table-row__date {
+    width: 15%;
 }

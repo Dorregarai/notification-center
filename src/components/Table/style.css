@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    justify-content: flex-start;
     flex-wrap: wrap;
     border-collapse: collapse;
 }
@@ -15,17 +16,36 @@
     padding: 10px;
     text-align: left;
 }
-.color {
+.table__color {
     padding-bottom: 10px;
     padding-top: 10px;
 }
-.category {
-
+.table__category {
+    border-top-width: 0;
     width: 15%;
 }
-.message {
+.table__text {
     width: 70%;
 }
-.date {
+.table__date {
     width: 15%;
+}
+
+.mark {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    color: white;
+    font-family: sans-serif;
+    background-color: #6161ff;
+}
+.mark:hover {
+    background-color: #8786ff;
+}
+.mark:active {
+    background-color: #6161ff;
 }

@@ -1,29 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 import './style.css';
-
+// TODO: read about БЭМ
 class TableRow extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            mesState: this.props.mesState,
-            category: this.props.category,
-            message: this.props.message,
-            date: this.props.date
+    getClassNameByCategory(category) {
+        switch (category) {
+            case 'DEBUG': return 'table-row__status__debug';
+            case 'INFO' : return 'table-row__status__info';
+            case 'ERROR': return 'table-row__status__error';
+            case 'CRIT' : return 'table-row__status__crit';
+            case 'WARN' : return 'table-row__status__warn';
         }
     }
-
-    handleOnClick = () => {
-        this.setState({mesState: "read"});
-    };
-
+    getClassNameByStatus(status){
+        if(status) return 'table-row__isRead__true';
+        else return 'table-row__isRead__false'
+    }
+    /* TODO: Move className calculation to separate place */
     renderMessage(){
         return(
-            <tr onClick={this.handleOnClick} className={this.state.mesState}>
-                <td className={this.state.category+" color"}> </td>
-                <td className="category">{this.state.category.toUpperCase()}</td>
-                <td className="message">{this.state.message}</td>
-                <td className="date">{this.state.date}</td>
+            <tr onClick={this.props.onClick} className={this.getClassNameByStatus(this.props.isRead)}>
+                <td className={this.getClassNameByCategory(this.props.category) + " table-row__color"}> </td>
+                <td className="table-row__category">{this.props.category}</td>
+                <td className="table-row__text">{this.props.text}</td>
+                <td className="table-row__date">{this.props.createdOn}</td>
             </tr>
         )
     }
@@ -36,19 +36,5 @@ class TableRow extends React.Component {
         )
     }
 }
-
-/*TableRow.defineProperty(obj, 'key', {
-    enumerable: false,
-    configurable: false,
-    writable: false,
-    value: 'static'
-});*/
-
-TableRow.propTypes = {
-            mesState: PropTypes.string.isRequired,
-            category: PropTypes.string.isRequired,
-            message: PropTypes.string.isRequired,
-            date: PropTypes.string.isRequired
-};
 
 export default TableRow;
