@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import './style.css';
 // TODO: read about БЭМ
 class TableRow extends React.Component {
@@ -14,13 +13,13 @@ class TableRow extends React.Component {
     }
     getClassNameByStatus(status){
         if(status) return 'table-row__isRead__true';
-        else return 'table-row__isRead__false'
+        return 'table-row__isRead__false'
     }
     /* TODO: Move className calculation to separate place */
     renderMessage(){
         return(
             <tr onClick={this.props.onClick} className={this.getClassNameByStatus(this.props.isRead)}>
-                <td className={this.getClassNameByCategory(this.props.category) + " table-row__color"}> </td>
+                <td className={this.getClassNameByCategory(this.props.category) + " table-row__color"}></td>
                 <td className="table-row__category">{this.props.category}</td>
                 <td className="table-row__text">{this.props.text}</td>
                 <td className="table-row__date">{this.props.createdOn}</td>
@@ -31,7 +30,7 @@ class TableRow extends React.Component {
     render() {
         return (
             <tbody className="table">
-                { this.renderMessage() }
+            { this.renderMessage() }
             </tbody>
         )
     }

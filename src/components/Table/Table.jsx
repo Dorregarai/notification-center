@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types'
 import TableRow from "../Table-row";
 import Dropdown from "../Dropdown";
+import axios from "axios";
 import './style.css';
 
 class Table extends React.Component{
@@ -12,18 +13,31 @@ class Table extends React.Component{
         };
     }
 
+    componentDidMount() {
+        this.getNotifications(10, 2)
+    }
+
+    getNotifications(perPage, page){
+        axios.get('http://localhost:3000/api/v1/notifications',{
+            params: {
+                perPage,
+                page
+            },
+        })
+            .then((response) => {
+                this.setState({
+                    data: response.data.notifications
+                });
+                console.log(response.data.notifications);
+            })
+    }
+
     handleNotificationClick = (notificationId) => {
         const dataWithReadNotification = this.state.data.map(notification => (
             notification.ID === notificationId ? { ...notification, isRead: true } : notification
         ));
         this.setState({ data: dataWithReadNotification });
     };
-
-    /*handleMarkButtonClick = (allNotificationIds) => {
-        this.state.data.map(notification => (
-            notification.ID ===
-        ))
-    };*/
 
     renderNotification(notification) {
         return (
@@ -51,7 +65,7 @@ class Table extends React.Component{
                         this.state.data.map(notification => this.renderNotification(notification))
                     }
                 </table>
-                <button className="mark">Mark all as read</button>
+                <button onClick={this.handleNotificationMarkButtonClick} className="mark">Mark all as read</button>
             </div>
         )
     }

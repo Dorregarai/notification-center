@@ -25,10 +25,10 @@
     width: 15%;
 }
 .table__text {
-    width: 70%;
+    width: 78%;
 }
 .table__date {
-    width: 15%;
+    width: 7%;
 }
 
 .mark {
@@ -41,11 +41,11 @@
     border: none;
     color: white;
     font-family: sans-serif;
-    background-color: #6161ff;
+    background-color: #5b7aff;
 }
 .mark:hover {
-    background-color: #8786ff;
+    background-color: #5168d0;
 }
 .mark:active {
-    background-color: #6161ff;
+    background-color: #5b7aff;
 }

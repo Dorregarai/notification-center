@@ -3,6 +3,6 @@
     display: inline-block;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown__content {
     display: block;
 }
