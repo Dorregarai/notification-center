@@ -42,7 +42,7 @@ class Table extends React.Component{
     renderNotification(notification) {
         return (
             <TableRow
-                key={notification.ID} // read about this
+                key={notification.ID}
                 {...notification}
                 onClick={() => this.handleNotificationClick(notification.ID)}
             />
@@ -65,7 +65,7 @@ class Table extends React.Component{
                         this.state.data.map(notification => this.renderNotification(notification))
                     }
                 </table>
-                <button onClick={this.handleNotificationMarkButtonClick} className="mark">Mark all as read</button>
+                <button className="mark">Mark all as read</button>
             </div>
         )
     }
@@ -79,8 +79,8 @@ Table.propTypes = {
             isRead: PropTypes.bool.isRequired,
             readOn: PropTypes.string.isRequired,
             text: PropTypes.string.isRequired,
-            category: PropTypes.string.isRequired, // must be array
-            priority: PropTypes.string.isRequired, // must be array
+            category: PropTypes.string.isRequired,
+            priority: PropTypes.string.isRequired,
             isPrivate: PropTypes.bool.isRequired
 
         })
