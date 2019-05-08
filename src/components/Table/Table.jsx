@@ -52,9 +52,19 @@ class Table extends React.Component{
             })
     };
 
-    handlePaginationClick(perPage = 10, page){   //TODO
-        this.getNotifications(page)
-    }
+    handleMarkAllAsReadButtonClick = () => {
+        axios.put('http://localhost:3000/api/v1/notifications/')
+            .then(() => {
+                this.setState({
+                    data: this.state.data.map(
+                        function (element) {
+                                return { ...element, isRead: true }
+                        }
+                    )
+                })
+            })
+    };
+
 
     renderNotification(notification) {
         return (
@@ -68,8 +78,8 @@ class Table extends React.Component{
 
     renderPaginationItem(textToDisplay, pageNumber, key) {
         return (
-            <li key={key} className="page-item">
-                <a className="page-link" onClick={() => this.getNotifications(pageNumber)}>
+            <li key={key} className="pagination__page-item">
+                <a className="pagination__page-link" onClick={() => this.getNotifications(pageNumber)}>
                     {textToDisplay}
                 </a>
             </li>
@@ -86,7 +96,7 @@ class Table extends React.Component{
         pages.push(this.renderPaginationItem(1, 1, 'first'));
 
         const pagesToDisplay = [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
-        const minPages = pagesToDisplay.filter(pageNumber => pageNumber > 1);
+        const minPages = pagesToDisplay.filter(pageNumber => pageNumber > 1 && pageNumber < countPage);
         const maxPages = pagesToDisplay.filter(pageNumber => pageNumber < countPage);
         const minPage = Math.min(...minPages);
         const maxPage = Math.max(...maxPages);
@@ -120,12 +130,12 @@ class Table extends React.Component{
                         this.state.data.map(notification => this.renderNotification(notification))
                     }
                 </table>
-                <ul className="paginationMenu">
+                <ul className="pagination">
                     {
                         this.renderPagination()
                     }
                 </ul>
-                <button className="mark">Mark all as read</button>
+                <button onClick={this.handleMarkAllAsReadButtonClick} className="mark">Mark all as read</button>
             </div>
         )
     }
