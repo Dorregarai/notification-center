@@ -49,3 +49,15 @@
 .mark:active {
     background-color: #5b7aff;
 }
+
+.paginationMenu {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+    justify-content: center;
+    position: fixed;
+    bottom: 60px;
+    list-style: none;
+    text-decoration: none;
+}

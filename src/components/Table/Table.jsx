@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types'
 import TableRow from "../Table-row";
 import Dropdown from "../Dropdown";
+import { PER_PAGE } from "./constants";
 import axios from "axios";
 import './style.css';
 
@@ -10,34 +11,50 @@ class Table extends React.Component{
         super(props);
         this.state = {
             data: props.data,
+            currentPage: 2,
+            countPage: 1
         };
     }
 
     componentDidMount() {
-        this.getNotifications(10, 2)
+        this.getNotifications(this.state.currentPage)
     }
 
-    getNotifications(perPage, page){
+    getNotifications(page){
         axios.get('http://localhost:3000/api/v1/notifications',{
             params: {
-                perPage,
+                perPage: PER_PAGE,
                 page
             },
         })
             .then((response) => {
                 this.setState({
-                    data: response.data.notifications
+                    data: response.data.notifications,
+                    countPage: response.data.pagination.total,
+                    currentPage: +response.data.pagination.page
                 });
-                console.log(response.data.notifications);
             })
     }
 
-    handleNotificationClick = (notificationId) => {
-        const dataWithReadNotification = this.state.data.map(notification => (
-            notification.ID === notificationId ? { ...notification, isRead: true } : notification
-        ));
-        this.setState({ data: dataWithReadNotification });
+    handleNotificationClick(ID) {
+        axios.put('http://localhost:3000/api/v1/notifications/' + ID)
+            .then(() => {
+                this.setState({
+                    data: this.state.data.map(
+                        function (element) {
+                            if(ID === element.ID){
+                                return { ...element, isRead: true }
+                            }
+                            return element
+                        }
+                    )
+                })
+            })
     };
+
+    handlePaginationClick(perPage = 10, page){   //TODO
+        this.getNotifications(page)
+    }
 
     renderNotification(notification) {
         return (
@@ -47,6 +64,44 @@ class Table extends React.Component{
                 onClick={() => this.handleNotificationClick(notification.ID)}
             />
         );
+    }
+
+    renderPaginationItem(textToDisplay, pageNumber, key) {
+        return (
+            <li key={key} className="page-item">
+                <a className="page-link" onClick={() => this.getNotifications(pageNumber)}>
+                    {textToDisplay}
+                </a>
+            </li>
+        )
+    }
+
+    renderPagination(){
+        const { currentPage, countPage } = this.state;
+        const pages = [];
+        if (currentPage !== 1) {
+            pages.push(this.renderPaginationItem('<', currentPage - 1, '<'))
+        }
+
+        pages.push(this.renderPaginationItem(1, 1, 'first'));
+
+        const pagesToDisplay = [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
+        const minPages = pagesToDisplay.filter(pageNumber => pageNumber > 1);
+        const maxPages = pagesToDisplay.filter(pageNumber => pageNumber < countPage);
+        const minPage = Math.min(...minPages);
+        const maxPage = Math.max(...maxPages);
+
+        for (let i = minPage; i <= maxPage; i++){
+            pages.push(this.renderPaginationItem(i, i, i));
+        }
+
+        pages.push(this.renderPaginationItem(countPage, countPage, countPage));
+
+        if (currentPage !== countPage) {
+            pages.push(this.renderPaginationItem('>', currentPage + 1, '>'));
+        }
+
+        return pages;
     }
 
     render(){
@@ -65,6 +120,11 @@ class Table extends React.Component{
                         this.state.data.map(notification => this.renderNotification(notification))
                     }
                 </table>
+                <ul className="paginationMenu">
+                    {
+                        this.renderPagination()
+                    }
+                </ul>
                 <button className="mark">Mark all as read</button>
             </div>
         )
@@ -88,38 +148,7 @@ Table.propTypes = {
 };
 
 Table.defaultProps = {
-    data: [
-        {
-            ID: 1,
-            createdOn: new Date().toLocaleString(),
-            isRead: false,
-            readOn: new Date().toLocaleString(),
-            text: 'Lorem 1',
-            category: 'ERROR',
-            priority: 'LOW',
-            isPrivate: false,
-        },
-        {
-            ID: 2,
-            createdOn: new Date().toLocaleString(),
-            isRead: false,
-            readOn: new Date().toLocaleString(),
-            text: 'Lorem 2',
-            category: 'CRIT',
-            priority: 'VERYLOW',
-            isPrivate: false,
-        },
-        {
-            ID: 3,
-            createdOn: new Date().toLocaleString(),
-            isRead: false,
-            readOn: new Date().toLocaleString(),
-            text: 'Lorem 3',
-            category: 'INFO',
-            priority: 'HIGH',
-            isPrivate: false,
-        }
-    ]
+    data: []
 };
 
 export default Table;

@@ -1,7 +1,6 @@
 import React from "react";
 import Table from "../../components/Table";
 import Header from "../../components/Header";
-import Pagination from "../../components/Pagination";
 import './style.css';
 
 class FormContainer extends React.Component {
@@ -10,7 +9,6 @@ class FormContainer extends React.Component {
             <div className="formContainer">
                 <Header />
                 <Table />
-                <Pagination />
             </div>
         );
     }
