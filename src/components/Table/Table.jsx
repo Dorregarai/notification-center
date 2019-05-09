@@ -2,67 +2,19 @@ import React from "react";
 import PropTypes from 'prop-types'
 import TableRow from "../Table-row";
 import Dropdown from "../Dropdown";
-import { PER_PAGE } from "./constants";
-import axios from "axios";
 import './style.css';
 
 class Table extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: props.data,
-            currentPage: 2,
-            countPage: 1
-        };
-    }
-
     componentDidMount() {
-        this.getNotifications(this.state.currentPage)
-    }
-
-    getNotifications(page){
-        axios.get('http://localhost:3000/api/v1/notifications',{
-            params: {
-                perPage: PER_PAGE,
-                page
-            },
-        })
-            .then((response) => {
-                this.setState({
-                    data: response.data.notifications,
-                    countPage: response.data.pagination.total,
-                    currentPage: +response.data.pagination.page
-                });
-            })
+        this.props.getNotifications(1)
     }
 
     handleNotificationClick(ID) {
-        axios.put('http://localhost:3000/api/v1/notifications/' + ID)
-            .then(() => {
-                this.setState({
-                    data: this.state.data.map(
-                        function (element) {
-                            if(ID === element.ID){
-                                return { ...element, isRead: true }
-                            }
-                            return element
-                        }
-                    )
-                })
-            })
+        this.props.markNotificationAsRead(ID)
     };
 
     handleMarkAllAsReadButtonClick = () => {
-        axios.put('http://localhost:3000/api/v1/notifications/')
-            .then(() => {
-                this.setState({
-                    data: this.state.data.map(
-                        function (element) {
-                                return { ...element, isRead: true }
-                        }
-                    )
-                })
-            })
+        this.props.markAllNotificationsAsRead()
     };
 
 
@@ -79,7 +31,7 @@ class Table extends React.Component{
     renderPaginationItem(textToDisplay, pageNumber, key) {
         return (
             <li key={key} className="pagination__page-item">
-                <a className="pagination__page-link" onClick={() => this.getNotifications(pageNumber)}>
+                <a className="pagination__page-link" onClick={() => this.props.getNotifications(pageNumber)}>
                     {textToDisplay}
                 </a>
             </li>
@@ -87,21 +39,21 @@ class Table extends React.Component{
     }
 
     renderPagination(){
-        const { currentPage, countPage } = this.state;
+        const { page, pagesCount } = this.props;
         const pages = [];
-        if (currentPage !== 1) {
-            pages.push(this.renderPaginationItem('<', currentPage - 1, '<'))
+        if (page !== 1) {
+            pages.push(this.renderPaginationItem('<', page - 1, '<'))
         }
 
         pages.push(this.renderPaginationItem(1, 1, 'first'));
 
-        if (currentPage - 3 > 1){
+        if (page - 3 > 1){
             pages.push(this.renderPaginationItem('...', '', 'leftDots'))
         }
 
-        const pagesToDisplay = [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
-        const minPages = pagesToDisplay.filter(pageNumber => pageNumber > 1 && pageNumber < countPage);
-        const maxPages = pagesToDisplay.filter(pageNumber => pageNumber < countPage);
+        const pagesToDisplay = [page - 2, page - 1, page, page + 1, page + 2];
+        const minPages = pagesToDisplay.filter(pageNumber => pageNumber > 1 && pageNumber < pagesCount);
+        const maxPages = pagesToDisplay.filter(pageNumber => pageNumber < pagesCount);
         const minPage = Math.min(...minPages);
         const maxPage = Math.max(...maxPages);
 
@@ -109,14 +61,14 @@ class Table extends React.Component{
             pages.push(this.renderPaginationItem(i, i, i));
         }
 
-        if (currentPage + 3 < countPage){
+        if (page + 3 < pagesCount){
             pages.push(this.renderPaginationItem('...', '', 'rightDots'))
         }
 
-        pages.push(this.renderPaginationItem(countPage, countPage, countPage));
+        pages.push(this.renderPaginationItem(pagesCount, pagesCount, pagesCount));
 
-        if (currentPage !== countPage) {
-            pages.push(this.renderPaginationItem('>', currentPage + 1, '>'));
+        if (page !== pagesCount) {
+            pages.push(this.renderPaginationItem('>', page + 1, '>'));
         }
 
         return pages;
@@ -135,7 +87,7 @@ class Table extends React.Component{
                     </tr>
                     </tbody>
                     {
-                        this.state.data.map(notification => this.renderNotification(notification))
+                        this.props.data.map(notification => this.renderNotification(notification))
                     }
                 </table>
                 <ul className="pagination">
@@ -150,17 +102,19 @@ class Table extends React.Component{
 }
 
 Table.propTypes = {
+    getNotifications: PropTypes.func.isRequired,
+    markNotificationAsRead: PropTypes.func.isRequired,
+    markAllNotificationsAsRead: PropTypes.func.isRequired,
     data: PropTypes.arrayOf(
         PropTypes.shape({
-            ID: PropTypes.number.isRequired,
+            ID: PropTypes.string.isRequired,
             createdOn: PropTypes.string.isRequired,
             isRead: PropTypes.bool.isRequired,
-            readOn: PropTypes.string.isRequired,
+            readOn: PropTypes.string,
             text: PropTypes.string.isRequired,
             category: PropTypes.string.isRequired,
             priority: PropTypes.string.isRequired,
-            isPrivate: PropTypes.bool.isRequired
-
+            isPrivate: PropTypes.bool
         })
     )
 };
