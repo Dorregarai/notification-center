@@ -95,6 +95,10 @@ class Table extends React.Component{
 
         pages.push(this.renderPaginationItem(1, 1, 'first'));
 
+        if (currentPage - 3 > 1){
+            pages.push(this.renderPaginationItem('...', '', 'leftDots'))
+        }
+
         const pagesToDisplay = [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
         const minPages = pagesToDisplay.filter(pageNumber => pageNumber > 1 && pageNumber < countPage);
         const maxPages = pagesToDisplay.filter(pageNumber => pageNumber < countPage);
@@ -103,6 +107,10 @@ class Table extends React.Component{
 
         for (let i = minPage; i <= maxPage; i++){
             pages.push(this.renderPaginationItem(i, i, i));
+        }
+
+        if (currentPage + 3 < countPage){
+            pages.push(this.renderPaginationItem('...', '', 'rightDots'))
         }
 
         pages.push(this.renderPaginationItem(countPage, countPage, countPage));
