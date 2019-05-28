@@ -1,6 +1,10 @@
 import { Notifications } from '../actions'
 
 const notificationsReducer = (state = {
+    filter: {
+        isRead: true,
+        category: 'INFO'
+    },
     pagination: {
         page: 1,
         perPage: 10,

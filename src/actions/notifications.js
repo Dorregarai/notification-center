@@ -1,11 +1,13 @@
 import axios from "axios";
 import {PER_PAGE} from "../components/Table/constants";
 
-export const getNotifications = (page, dispatch) => {
+export const getNotifications = (page, isRead, category, dispatch) => {
     axios.get('http://localhost:3000/api/v1/notifications',{
         params: {
             perPage: PER_PAGE,
-            page
+            page,
+            isRead,
+            category
         },
     })
         .then((response) => {
@@ -17,7 +19,6 @@ export const getNotifications = (page, dispatch) => {
                 }
             })
         });
-
     return { type: 'GET_NOTIFICATIONS_PENDING' }
 };
 

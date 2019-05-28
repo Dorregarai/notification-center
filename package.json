@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development --watch",
     "build": "webpack --mode production",
-    "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -21,17 +20,17 @@
     "prop-types": "^15.7.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "style-loader": "^0.23.1",
+    "css-loader": "^2.1.1"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "axios": "^0.18.0",
-    "css-loader": "^2.1.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
-    "redux": "^4.0.1",
-    "style-loader": "^0.23.1"
+    "redux": "^4.0.1"
   }
 }
