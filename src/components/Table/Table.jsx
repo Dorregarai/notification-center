@@ -11,6 +11,7 @@ class Table extends React.Component{
     }
 
     handleNotificationClick = (ID) => {
+        console.log(this.props.pagesCount);
         this.props.markNotificationAsRead(ID)
     };
 
@@ -187,7 +188,6 @@ class Table extends React.Component{
 
 Table.propTypes = {
     getNotifications: PropTypes.func.isRequired,
-    getNotificationsWithFilter: PropTypes.func,
     markNotificationAsRead: PropTypes.func.isRequired,
     markAllNotificationsAsRead: PropTypes.func.isRequired,
     data: PropTypes.arrayOf(

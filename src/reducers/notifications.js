@@ -1,10 +1,6 @@
 import { Notifications } from '../actions'
 
 const notificationsReducer = (state = {
-    filter: {
-        isRead: true,
-        category: 'INFO'
-    },
     pagination: {
         page: 1,
         perPage: 10,
@@ -15,6 +11,7 @@ const notificationsReducer = (state = {
                               action) => {
     switch (action.type) {
         case 'GET_NOTIFICATIONS_SUCCESS':
+            console.log(action.payload.pagination);
             return {
                 ...state,
                 data: action.payload.notifications,
