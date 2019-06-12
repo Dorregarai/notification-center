@@ -1,0 +1,16 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    bottom: 60px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.pagination__page-item {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}

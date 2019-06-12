@@ -11,7 +11,6 @@ const notificationsReducer = (state = {
                               action) => {
     switch (action.type) {
         case 'GET_NOTIFICATIONS_SUCCESS':
-            console.log(action.payload.pagination);
             return {
                 ...state,
                 data: action.payload.notifications,

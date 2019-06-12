@@ -1,0 +1,14 @@
+.table__color {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.table__category {
+    border-top-width: 0;
+    width: 15%;
+}
+.table__text {
+    width: 78%;
+}
+.table__date {
+    width: 7%;
+}

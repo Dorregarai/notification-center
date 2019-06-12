@@ -7,7 +7,12 @@ class Dropdown extends React.Component{
         return(
             <div className="dropdown">
                 <span>Category</span>
-                    <DropdownContent/>
+                    <DropdownContent
+                        getNotificationsWithFilter={this.props.getNotificationsWithFilter}
+                        clearFilter={this.props.clearFilter}
+                        filterIsRead={this.props.filterIsRead}
+                        filterCategory={this.props.filterCategory}
+                    />
             </div>
         )
     }
