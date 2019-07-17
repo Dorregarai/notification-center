@@ -5,16 +5,18 @@ import Dropdown from "../Dropdown";
 
 class TableHead extends React.Component {
     render(){
+        const { page, filterIsRead, filterCategory, getNotifications, clearFilter } = this.props;
         return(
             <tbody className="table">
                 <tr>
                     <th className="table__color" />
                     <th className="table__category">
                         <Dropdown
-                            getNotificationsWithFilter={this.props.getNotificationsWithFilter}
-                            clearFilter={this.props.clearFilter}
-                            filterIsRead={this.props.filterIsRead}
-                            filterCategory={this.props.filterCategory}
+                            getNotifications={getNotifications}
+                            page={page}
+                            clearFilter={clearFilter}
+                            filterIsRead={filterIsRead}
+                            filterCategory={filterCategory}
                         />
                     </th>
                     <th className="table__text">Message</th>

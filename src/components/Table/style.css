@@ -17,7 +17,7 @@
     text-align: left;
 }
 
-.mainBlockOfTable {
+.table-row_body {
     max-height: 800px;
     overflow: scroll;
     overflow-x: hidden;

@@ -1,10 +1,6 @@
 import Table from './Table';
-import {
-    getNotifications,
-    markNotificationAsRead,
-    markAllNotificationsAsRead,
-} from '../../actions/notifications';
 import { connect } from 'react-redux';
+import * as TYPES from '../../actions/actionTypes'
 
 function mapStateToProps(state) {
     return {
@@ -15,9 +11,21 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        getNotifications: (page, category, isRead) => dispatch(getNotifications(page, category, isRead, dispatch)),
-        markNotificationAsRead: ID => dispatch(markNotificationAsRead(ID, dispatch)),
-        markAllNotificationsAsRead: () => dispatch(markAllNotificationsAsRead(dispatch))
+        getNotifications: (page, isRead, category) => {
+            dispatch({
+                type: TYPES.GET_NOTIFICATIONS_REQUEST,
+                page,
+                isRead,
+                category
+            })
+        },
+        markNotificationAsRead: ID => dispatch({
+            type: TYPES.MARK_NOTIFICATION_AS_READ_REQUEST,
+            ID
+        }),
+        markAllNotificationsAsRead: () => dispatch({
+            type: TYPES.MARK_ALL_NOTIFICATIONS_AS_READ_REQUEST
+        })
     }
 }
 

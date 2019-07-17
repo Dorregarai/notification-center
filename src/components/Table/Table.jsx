@@ -11,7 +11,7 @@ class Table extends React.Component{
         this.props.getNotifications(1)
     }
 
-    getNotificationsWithFilter = (page = 1, isRead = undefined, category = undefined) => {
+    getNotifications = (page = 1, isRead, category) => {
         this.props.getNotifications(page, isRead, category)
     };
 
@@ -59,7 +59,7 @@ class Table extends React.Component{
         for(let i = 0; i < document.getElementsByName('category').length; i++){
             document.getElementsByName('category')[i].checked = false
         }
-        this.getNotificationsWithFilter(1, undefined, undefined)
+        this.props.getNotifications(1)
     }
 
     renderNotification(notification) {
@@ -77,19 +77,23 @@ class Table extends React.Component{
             <div className="mainBlockOfTable">
                 <table className="table">
                     <TableHead
-                        getNotificationsWithFilter={this.getNotificationsWithFilter}
+                        getNotifications={this.props.getNotifications}
+                        page={this.props.page}
                         filterIsRead={this.filterIsRead}
                         filterCategory={this.filterCategory}
                         clearFilter={this.clearFilter}
                     />
+                    <tbody className="table-row_body">
                     {
+                        //console.log(this.props.data)
                         this.props.data.map(notification => this.renderNotification(notification))
                     }
+                    </tbody>
                 </table>
                 <Pagination
                     page={this.props.page}
                     pagesCount={this.props.pagesCount}
-                    getNotifications={this.getNotificationsWithFilter}
+                    getNotifications={this.props.getNotifications}
                     filterIsRead={this.filterIsRead}
                     filterCategory={this.filterCategory}
                 />

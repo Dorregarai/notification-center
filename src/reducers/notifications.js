@@ -1,4 +1,5 @@
-import { Notifications } from '../actions'
+import { Notifications } from '../actions';
+import * as TYPES from '../actions/actionTypes';
 
 const notificationsReducer = (state = {
     pagination: {
@@ -10,33 +11,38 @@ const notificationsReducer = (state = {
 },
                               action) => {
     switch (action.type) {
-        case 'GET_NOTIFICATIONS_SUCCESS':
-            return {
-                ...state,
+        case TYPES.GET_NOTIFICATIONS_REQUEST:
+            return Object.assign({}, state,{
+                pagination: action.payload
+            });
+        case TYPES.GET_NOTIFICATIONS_SUCCESS:
+            return Object.assign({}, state, {
                 data: action.payload.notifications,
                 pagination: action.payload.pagination
-            };
-        case 'MARK_NOTIFICATION_AS_READ_SUCCESS':
-            return {
-                ...state,
+            });
+
+        case TYPES.MARK_NOTIFICATION_AS_READ_REQUEST:
+            const currentID = action.ID;
+            return Object.assign({}, state, {
                 data: state.data.map(
                     function (element) {
-                        if(action.payload === element.ID){
+                        if(currentID === element.ID){
                             return { ...element, isRead: true }
                         }
                         return element
                     }
                 )
-            };
-        case 'MARK_ALL_NOTIFICATIONS_AS_READ_SUCCESS':
-            return {
-                ...state,
+            });
+
+        case TYPES.MARK_ALL_NOTIFICATIONS_AS_READ_REQUEST:
+            return Object.assign({}, state, {
                 data: state.data.map(
                     function (element) {
-                        return { ...element, isRead: true }
+                            return { ...element, isRead: true }
                     }
                 )
-            };
+            });
+
         default:
             return state
     }

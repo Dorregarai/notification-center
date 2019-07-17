@@ -4,14 +4,16 @@ import './style.css';
 
 class Dropdown extends React.Component{
     render(){
+        const { page, filterIsRead, filterCategory, getNotifications, clearFilter } = this.props;
         return(
             <div className="dropdown">
                 <span>Category</span>
                     <DropdownContent
-                        getNotificationsWithFilter={this.props.getNotificationsWithFilter}
-                        clearFilter={this.props.clearFilter}
-                        filterIsRead={this.props.filterIsRead}
-                        filterCategory={this.props.filterCategory}
+                        getNotifications={getNotifications}
+                        page={page}
+                        clearFilter={clearFilter}
+                        filterIsRead={filterIsRead}
+                        filterCategory={filterCategory}
                     />
             </div>
         )

@@ -3,14 +3,15 @@ import './style.css';
 
 class Pagination extends React.Component {
     renderPaginationItem(textToDisplay, pageNumber, key) {
+        const { filterIsRead, filterCategory, getNotifications } = this.props;
         return (
             <li key={key} className="pagination__page-item">
                 <a
                     className='pagination__page-link'
-                    onClick={() => this.props.getNotifications(
+                    onClick={() => getNotifications(
                         pageNumber,
-                        this.props.filterIsRead(),
-                        this.props.filterCategory()
+                        filterIsRead(),
+                        filterCategory()
                     )}
                 >
                     {textToDisplay}

@@ -1,11 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import FormContainer from "./container/FormContainer/FormContainer";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import FormContainer from './container/FormContainer/FormContainer';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './reducers'
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
+import createSagaMiddleware from 'redux-saga';
+import mySaga from './sagas/saga';
 
-const store = createStore(rootReducer);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(mySaga);
 
 ReactDOM.render(
     <Provider store={store}>

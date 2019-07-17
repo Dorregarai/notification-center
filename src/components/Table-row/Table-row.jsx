@@ -16,22 +16,14 @@ class TableRow extends React.Component {
         return 'table-row__isRead__false'
     }
 
-    renderMessage(){
-        return(
+    render() {
+        return (
             <tr onClick={this.props.onClick} className={this.getClassNameByStatus(this.props.isRead)}>
                 <td className={this.getClassNameByCategory(this.props.category) + " table-row__color"} />
                 <td className="table-row__category">{this.props.category}</td>
                 <td className="table-row__text">{this.props.text}</td>
                 <td className="table-row__date">{this.props.createdOn}</td>
             </tr>
-        )
-    }
-
-    render() {
-        return (
-            <tbody className="table">
-            { this.renderMessage() }
-            </tbody>
         )
     }
 }

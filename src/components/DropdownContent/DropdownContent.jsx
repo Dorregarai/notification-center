@@ -4,15 +4,17 @@ import './style.css';
 
 class DropdownContent extends React.Component{
     handleApplyFilterClick = () => {
-        this.props.getNotificationsWithFilter(this.props.page, this.props.filterIsRead(), this.props.filterCategory())
+        const { page, filterIsRead, filterCategory, getNotifications } = this.props;
+        getNotifications(page, filterIsRead(), filterCategory())
     };
 
     render(){
+        const { clearFilter } = this.props;
         return(
             <div className="dropdown__content">
                 <button
                     className="dropdown__content__reset"
-                    onClick={() => this.props.clearFilter()}
+                    onClick={() => clearFilter()}
                 >
                     Reset filter</button>
                 <p className="dropdown__content__isRead">
