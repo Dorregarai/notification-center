@@ -30,7 +30,7 @@ const apiMarkAllNotificationsAsRead = () => {
 
 export function* fetchGetNotifications(action) {
     try {
-        const notifications = yield call(apiGetNotifications, action.page );
+        const notifications = yield call(apiGetNotifications, action.page, action.isRead, action.category );
         yield put({ type: TYPES.GET_NOTIFICATIONS_SUCCESS, payload: notifications })
     } catch (error) {
         yield put({ type: TYPES.GET_NOTIFICATIONS_FAILURE, payload: error })

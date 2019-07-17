@@ -11,10 +11,6 @@ class Table extends React.Component{
         this.props.getNotifications(1)
     }
 
-    getNotifications = (page = 1, isRead, category) => {
-        this.props.getNotifications(page, isRead, category)
-    };
-
     handleNotificationClick = (ID) => {
         this.props.markNotificationAsRead(ID)
     };
@@ -53,14 +49,14 @@ class Table extends React.Component{
         }
     }
 
-    clearFilter(){
+    clearFilter = () => {
         document.getElementsByName('isRead')[0].checked = false;
         document.getElementsByName('isRead')[1].checked = false;
         for(let i = 0; i < document.getElementsByName('category').length; i++){
             document.getElementsByName('category')[i].checked = false
         }
         this.props.getNotifications(1)
-    }
+    };
 
     renderNotification(notification) {
         return (
@@ -85,7 +81,6 @@ class Table extends React.Component{
                     />
                     <tbody className="table-row_body">
                     {
-                        //console.log(this.props.data)
                         this.props.data.map(notification => this.renderNotification(notification))
                     }
                     </tbody>

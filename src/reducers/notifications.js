@@ -13,7 +13,7 @@ const notificationsReducer = (state = {
     switch (action.type) {
         case TYPES.GET_NOTIFICATIONS_REQUEST:
             return Object.assign({}, state,{
-                pagination: action.payload
+                pagination: action
             });
         case TYPES.GET_NOTIFICATIONS_SUCCESS:
             return Object.assign({}, state, {

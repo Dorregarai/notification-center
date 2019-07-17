@@ -14,7 +14,7 @@ class DropdownContent extends React.Component{
             <div className="dropdown__content">
                 <button
                     className="dropdown__content__reset"
-                    onClick={() => clearFilter()}
+                    onClick={ clearFilter }
                 >
                     Reset filter</button>
                 <p className="dropdown__content__isRead">
